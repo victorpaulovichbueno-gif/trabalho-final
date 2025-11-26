@@ -11,46 +11,78 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f4f4f4;
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #7cb342;
+            --accent-color: #f5a623;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --border-color: #e8eef5;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.12);
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background-color: var(--light-bg);
+            font-size: 16px;
+        }
+
+        /* ===== HEADER ===== */
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-bottom: 1px solid var(--border-color);
+            padding: 60px 20px;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
         }
 
         header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: 3em;
+            color: var(--text-dark);
+            margin-bottom: 15px;
             font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         header p {
-            font-size: 1.1em;
-            opacity: 0.95;
-        }
-
-        .container {
-            max-width: 1200px;
+            font-size: 1.2em;
+            color: var(--text-light);
+            font-weight: 300;
+            max-width: 600px;
             margin: 0 auto;
-            padding: 20px;
         }
 
+        /* ===== NAVEGAÇÃO ===== */
         nav {
-            background-color: #333;
-            padding: 15px 0;
-            margin-bottom: 30px;
+            background-color: var(--white);
+            padding: 0;
+            margin-bottom: 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
+            border-bottom: 1px solid var(--border-color);
         }
 
         nav ul {
@@ -59,158 +91,281 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav li {
+            flex: 1;
+            text-align: center;
+            max-width: 200px;
         }
 
         nav a {
-            color: white;
+            color: var(--text-dark);
             text-decoration: none;
-            padding: 12px 20px;
+            padding: 18px 20px;
             display: block;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.95em;
+            border-bottom: 3px solid transparent;
         }
 
         nav a:hover {
-            background-color: #667eea;
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+            background-color: rgba(74, 144, 226, 0.05);
         }
 
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* ===== SEÇÕES ===== */
         section {
-            background: white;
-            padding: 40px;
+            background: var(--white);
+            padding: 50px 40px;
             margin-bottom: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        section:hover {
+            box-shadow: var(--shadow-hover);
         }
 
         section h2 {
-            color: #667eea;
-            font-size: 2em;
-            margin-bottom: 20px;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
+            color: var(--text-dark);
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
         }
 
         section h3 {
-            color: #764ba2;
+            color: var(--primary-color);
             font-size: 1.5em;
-            margin-top: 25px;
-            margin-bottom: 15px;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        section h3:first-of-type {
+            margin-top: 0;
         }
 
         p {
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             text-align: justify;
             font-size: 1em;
+            color: var(--text-dark);
+            line-height: 1.8;
         }
 
         ul, ol {
             margin-left: 30px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         li {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+            line-height: 1.8;
         }
 
+        /* ===== TABELAS ===== */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
+            margin: 30px 0;
             font-size: 0.95em;
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         table thead {
-            background-color: #667eea;
-            color: white;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #5a9ef7 100%);
+            color: var(--white);
         }
 
-        table th, table td {
-            padding: 12px;
+        table th {
+            padding: 16px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-dark);
+        }
+
+        table tbody tr {
+            transition: background-color 0.2s ease;
         }
 
         table tbody tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: rgba(74, 144, 226, 0.03);
         }
 
         table tbody tr:hover {
-            background-color: #f0f0f0;
+            background-color: rgba(74, 144, 226, 0.08);
         }
 
-        .chart-container {
-            margin: 30px 0;
-            text-align: center;
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
+        table tbody tr:last-child td {
+            border-bottom: none;
         }
 
-        .chart-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 4px;
-        }
-
-        .chart-container h4 {
-            color: #764ba2;
-            margin-top: 15px;
-            font-size: 1.1em;
-        }
-
+        /* ===== CARDS E DESTAQUE ===== */
         .highlight {
-            background-color: #fff3cd;
-            padding: 15px;
-            border-left: 4px solid #ffc107;
-            margin: 20px 0;
-            border-radius: 4px;
+            background: linear-gradient(135deg, rgba(124, 179, 66, 0.08) 0%, rgba(245, 166, 35, 0.08) 100%);
+            padding: 25px;
+            border-left: 4px solid var(--secondary-color);
+            margin: 30px 0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .highlight:hover {
+            background: linear-gradient(135deg, rgba(124, 179, 66, 0.12) 0%, rgba(245, 166, 35, 0.12) 100%);
+            box-shadow: var(--shadow);
         }
 
         .highlight strong {
-            color: #856404;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-        }
-
-        footer p {
-            margin: 0;
-            text-align: center;
+            color: var(--secondary-color);
+            font-weight: 600;
         }
 
         .institution-info {
-            background-color: #f0f0f0;
-            padding: 20px;
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.08) 0%, rgba(124, 179, 66, 0.08) 100%);
+            padding: 25px;
             border-radius: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             text-align: center;
             font-size: 0.95em;
+            border: 1px solid var(--border-color);
+            line-height: 1.9;
         }
 
         .institution-info strong {
-            color: #667eea;
+            color: var(--primary-color);
+            font-weight: 600;
         }
 
+        /* ===== GRÁFICOS ===== */
+        .chart-container {
+            margin: 40px 0;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.04) 0%, rgba(124, 179, 66, 0.04) 100%);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .chart-container:hover {
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.08) 0%, rgba(124, 179, 66, 0.08) 100%);
+            box-shadow: var(--shadow);
+        }
+
+        .chart-container svg {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            background: var(--white);
+            padding: 15px;
+        }
+
+        .chart-container h4 {
+            color: var(--primary-color);
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .chart-container p {
+            color: var(--text-light);
+            font-size: 0.95em;
+            margin-top: 10px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            color: var(--text-dark);
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer p {
+            margin: 8px 0;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.95em;
+        }
+
+        footer p:first-child {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* ===== RESPONSIVO ===== */
         @media (max-width: 768px) {
             header h1 {
-                font-size: 1.8em;
+                font-size: 2em;
+            }
+
+            header p {
+                font-size: 1em;
             }
 
             nav ul {
                 flex-direction: column;
             }
 
+            nav li {
+                max-width: 100%;
+            }
+
             nav a {
-                padding: 10px 15px;
+                padding: 15px 10px;
+                font-size: 0.9em;
             }
 
             section {
-                padding: 20px;
+                padding: 30px 20px;
+                border-left-width: 3px;
+            }
+
+            section h2 {
+                font-size: 1.8em;
+            }
+
+            section h3 {
+                font-size: 1.3em;
             }
 
             table {
@@ -218,8 +373,62 @@
             }
 
             table th, table td {
+                padding: 10px;
+            }
+
+            .chart-container {
+                padding: 20px;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.6em;
+            }
+
+            header p {
+                font-size: 0.9em;
+            }
+
+            section {
+                padding: 20px 15px;
+            }
+
+            section h2 {
+                font-size: 1.5em;
+            }
+
+            section h3 {
+                font-size: 1.1em;
+            }
+
+            table {
+                font-size: 0.8em;
+            }
+
+            table th, table td {
                 padding: 8px;
             }
+        }
+
+        /* ===== ANIMAÇÕES ===== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            animation: fadeIn 0.6s ease-out;
         }
     </style>
 </head>
@@ -240,7 +449,7 @@
     </nav>
 
     <div class="container">
-        <!-- Seção de Introdução -->
+        <!-- SEÇÃO: INTRODUÇÃO -->
         <section id="introducao">
             <h2>Introdução</h2>
             <div class="institution-info">
@@ -260,7 +469,7 @@
             </p>
         </section>
 
-        <!-- Seção de Hipótese e Objetivos -->
+        <!-- SEÇÃO: HIPÓTESE E OBJETIVOS -->
         <section id="hipotese">
             <h2>Hipótese e Objetivos</h2>
             
@@ -279,7 +488,7 @@
             </ul>
         </section>
 
-        <!-- Seção de Metodologia -->
+        <!-- SEÇÃO: METODOLOGIA -->
         <section id="metodologia">
             <h2>Metodologia</h2>
 
@@ -341,7 +550,7 @@
             </div>
         </section>
 
-        <!-- Seção de Resultados -->
+        <!-- SEÇÃO: RESULTADOS -->
         <section id="resultados">
             <h2>Resultados</h2>
 
@@ -364,19 +573,19 @@
                     </tr>
                     <tr>
                         <td><strong>Sexo (Masculino) N (%)</strong></td>
-                        <td>750 (49.8%)</td>
+                        <td>750 (49,8%)</td>
                     </tr>
                     <tr>
                         <td><strong>Idade (meses) Média ± DP</strong></td>
-                        <td>2.9 ± 1.6</td>
+                        <td>2,9 ± 1,6</td>
                     </tr>
                     <tr>
                         <td><strong>Retinol (µmol/L) Média ± DP</strong></td>
-                        <td>1.13 ± 0.67</td>
+                        <td>1,13 ± 0,67</td>
                     </tr>
                     <tr>
                         <td><strong>Hemoglobina (g/dL) Média ± DP</strong></td>
-                        <td>11.54 ± 1.89</td>
+                        <td>11,54 ± 1,89</td>
                     </tr>
                 </tbody>
             </table>
@@ -398,12 +607,12 @@
                     <tr>
                         <td><strong>Peso Normal</strong></td>
                         <td>1.049</td>
-                        <td>97.9%</td>
+                        <td>97,9%</td>
                     </tr>
                     <tr>
                         <td><strong>Baixo Peso</strong></td>
                         <td>22</td>
-                        <td>2.1%</td>
+                        <td>2,1%</td>
                     </tr>
                 </tbody>
             </table>
@@ -424,19 +633,19 @@
                 <tbody>
                     <tr>
                         <td><strong>Peso Normal</strong></td>
-                        <td>1.14 ± 0.68</td>
-                        <td>11.56 ± 1.89</td>
+                        <td>1,14 ± 0,68</td>
+                        <td>11,56 ± 1,89</td>
                     </tr>
                     <tr>
                         <td><strong>Baixo Peso</strong></td>
-                        <td>1.02 ± 0.54</td>
-                        <td>11.23 ± 1.78</td>
+                        <td>1,02 ± 0,54</td>
+                        <td>11,23 ± 1,78</td>
                     </tr>
                 </tbody>
             </table>
 
             <div class="highlight">
-                <strong>Achado Principal:</strong> Crianças com baixo peso apresentaram níveis ligeiramente menores de retinol sérico (1.02 vs. 1.14 µmol/L) e hemoglobina (11.23 vs. 11.56 g/dL) em comparação com crianças com peso normal, sugerindo uma possível associação entre estado nutricional e status de micronutrientes.
+                <strong>Achado Principal:</strong> Crianças com baixo peso apresentaram níveis ligeiramente menores de retinol sérico (1,02 vs. 1,14 µmol/L) e hemoglobina (11,23 vs. 11,56 g/dL) em comparação com crianças com peso normal, sugerindo uma possível associação entre estado nutricional e status de micronutrientes.
             </div>
 
             <h3>Gráficos Descritivos</h3>
@@ -447,103 +656,82 @@
             <div class="chart-container">
                 <h4>Distribuição da Idade das Crianças (em meses)</h4>
                 <p>Este gráfico apresenta a distribuição da idade das crianças na amostra, mostrando que a maioria das crianças avaliadas tinha entre 0 e 5 meses de idade.</p>
-                <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
-                    <!-- Eixos -->
-                    <line x1="50" y1="350" x2="550" y2="350" stroke="black" stroke-width="2"/>
-                    <line x1="50" y1="50" x2="50" y2="350" stroke="black" stroke-width="2"/>
+                <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="600" height="400" fill="#ffffff" rx="8"/>
+                    <line x1="50" y1="350" x2="550" y2="350" stroke="#e8eef5" stroke-width="2"/>
+                    <line x1="50" y1="50" x2="50" y2="350" stroke="#e8eef5" stroke-width="2"/>
                     
-                    <!-- Barras do histograma -->
-                    <rect x="70" y="280" width="40" height="70" fill="#1f77b4" opacity="0.7"/>
-                    <rect x="120" y="200" width="40" height="150" fill="#1f77b4" opacity="0.7"/>
-                    <rect x="170" y="150" width="40" height="200" fill="#1f77b4" opacity="0.7"/>
-                    <rect x="220" y="120" width="40" height="230" fill="#1f77b4" opacity="0.7"/>
-                    <rect x="270" y="100" width="40" height="250" fill="#1f77b4" opacity="0.7"/>
-                    <rect x="320" y="130" width="40" height="220" fill="#1f77b4" opacity="0.7"/>
-                    <rect x="370" y="180" width="40" height="170" fill="#1f77b4" opacity="0.7"/>
-                    <rect x="420" y="250" width="40" height="100" fill="#1f77b4" opacity="0.7"/>
-                    <rect x="470" y="300" width="40" height="50" fill="#1f77b4" opacity="0.7"/>
+                    <rect x="70" y="280" width="40" height="70" fill="#4a90e2" opacity="0.8" rx="4"/>
+                    <rect x="120" y="200" width="40" height="150" fill="#4a90e2" opacity="0.8" rx="4"/>
+                    <rect x="170" y="150" width="40" height="200" fill="#4a90e2" opacity="0.8" rx="4"/>
+                    <rect x="220" y="120" width="40" height="230" fill="#4a90e2" opacity="0.8" rx="4"/>
+                    <rect x="270" y="100" width="40" height="250" fill="#4a90e2" opacity="0.8" rx="4"/>
+                    <rect x="320" y="130" width="40" height="220" fill="#4a90e2" opacity="0.8" rx="4"/>
+                    <rect x="370" y="180" width="40" height="170" fill="#4a90e2" opacity="0.8" rx="4"/>
+                    <rect x="420" y="250" width="40" height="100" fill="#4a90e2" opacity="0.8" rx="4"/>
+                    <rect x="470" y="300" width="40" height="50" fill="#4a90e2" opacity="0.8" rx="4"/>
                     
-                    <!-- Rótulos dos eixos -->
-                    <text x="300" y="380" text-anchor="middle" font-size="14">Idade (meses )</text>
-                    <text x="20" y="200" text-anchor="middle" font-size="14" transform="rotate(-90 20 200)">Frequência</text>
-                    
-                    <!-- Valores dos eixos X -->
-                    <text x="90" y="370" text-anchor="middle" font-size="12">0</text>
-                    <text x="140" y="370" text-anchor="middle" font-size="12">1</text>
-                    <text x="190" y="370" text-anchor="middle" font-size="12">2</text>
-                    <text x="240" y="370" text-anchor="middle" font-size="12">3</text>
-                    <text x="290" y="370" text-anchor="middle" font-size="12">4</text>
-                    <text x="340" y="370" text-anchor="middle" font-size="12">5</text>
-                    <text x="390" y="370" text-anchor="middle" font-size="12">6</text>
-                    <text x="440" y="370" text-anchor="middle" font-size="12">7</text>
-                    <text x="490" y="370" text-anchor="middle" font-size="12">8</text>
+                    <text x="300" y="385" text-anchor="middle" font-size="14" fill="#2c3e50" font-weight="500">Idade (meses )</text>
+                    <text x="20" y="200" text-anchor="middle" font-size="14" fill="#2c3e50" font-weight="500" transform="rotate(-90 20 200)">Frequência</text>
                 </svg>
             </div>
 
             <div class="chart-container">
-                <h4>Retinol por Estado Nutricional (WAZ)</h4>
+                <h4>Retinol por Estado Nutricional</h4>
                 <p>Este gráfico de caixa (boxplot) compara os níveis de retinol sérico entre crianças com baixo peso e peso normal.</p>
-                <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
-                    <!-- Eixos -->
-                    <line x1="80" y1="300" x2="550" y2="300" stroke="black" stroke-width="2"/>
-                    <line x1="80" y1="50" x2="80" y2="300" stroke="black" stroke-width="2"/>
+                <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="600" height="400" fill="#ffffff" rx="8"/>
+                    <line x1="80" y1="300" x2="550" y2="300" stroke="#e8eef5" stroke-width="2"/>
+                    <line x1="80" y1="50" x2="80" y2="300" stroke="#e8eef5" stroke-width="2"/>
                     
-                    <!-- Caixa Peso Normal -->
-                    <rect x="150" y="150" width="80" height="100" fill="#ffd7b5" stroke="black" stroke-width="2"/>
-                    <line x1="150" y1="180" x2="230" y2="180" stroke="black" stroke-width="2"/>
-                    <line x1="190" y1="100" x2="190" y2="150" stroke="black" stroke-width="1"/>
-                    <line x1="190" y1="250" x2="190" y2="280" stroke="black" stroke-width="1"/>
-                    <line x1="170" y1="100" x2="210" y2="100" stroke="black" stroke-width="1"/>
-                    <line x1="170" y1="280" x2="210" y2="280" stroke="black" stroke-width="1"/>
+                    <rect x="150" y="150" width="80" height="100" fill="#7cb342" opacity="0.7" stroke="#7cb342" stroke-width="2" rx="4"/>
+                    <line x1="150" y1="180" x2="230" y2="180" stroke="#ffffff" stroke-width="2"/>
+                    <line x1="190" y1="100" x2="190" y2="150" stroke="#7cb342" stroke-width="2"/>
+                    <line x1="190" y1="250" x2="190" y2="280" stroke="#7cb342" stroke-width="2"/>
+                    <line x1="170" y1="100" x2="210" y2="100" stroke="#7cb342" stroke-width="2"/>
+                    <line x1="170" y1="280" x2="210" y2="280" stroke="#7cb342" stroke-width="2"/>
                     
-                    <!-- Caixa Baixo Peso -->
-                    <rect x="350" y="160" width="80" height="90" fill="#ffe4b5" stroke="black" stroke-width="2"/>
-                    <line x1="350" y1="190" x2="430" y2="190" stroke="black" stroke-width="2"/>
-                    <line x1="390" y1="110" x2="390" y2="160" stroke="black" stroke-width="1"/>
-                    <line x1="390" y1="250" x2="390" y2="270" stroke="black" stroke-width="1"/>
-                    <line x1="370" y1="110" x2="410" y2="110" stroke="black" stroke-width="1"/>
-                    <line x1="370" y1="270" x2="410" y2="270" stroke="black" stroke-width="1"/>
+                    <rect x="350" y="160" width="80" height="90" fill="#f5a623" opacity="0.7" stroke="#f5a623" stroke-width="2" rx="4"/>
+                    <line x1="350" y1="190" x2="430" y2="190" stroke="#ffffff" stroke-width="2"/>
+                    <line x1="390" y1="110" x2="390" y2="160" stroke="#f5a623" stroke-width="2"/>
+                    <line x1="390" y1="250" x2="390" y2="270" stroke="#f5a623" stroke-width="2"/>
+                    <line x1="370" y1="110" x2="410" y2="110" stroke="#f5a623" stroke-width="2"/>
+                    <line x1="370" y1="270" x2="410" y2="270" stroke="#f5a623" stroke-width="2"/>
                     
-                    <!-- Rótulos -->
-                    <text x="190" y="330" text-anchor="middle" font-size="14">Peso Normal</text>
-                    <text x="390" y="330" text-anchor="middle" font-size="14">Baixo Peso</text>
-                    <text x="50" y="175" text-anchor="middle" font-size="12">Retinol</text>
+                    <text x="190" y="330" text-anchor="middle" font-size="14" fill="#2c3e50" font-weight="500">Peso Normal</text>
+                    <text x="390" y="330" text-anchor="middle" font-size="14" fill="#2c3e50" font-weight="500">Baixo Peso</text>
                 </svg>
             </div>
 
             <div class="chart-container">
-                <h4>Hemoglobina por Estado Nutricional (WAZ )</h4>
-                <p>Este gráfico de caixa (boxplot) compara os níveis de hemoglobina entre crianças com baixo peso e peso normal.</p>
-                <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
-                    <!-- Eixos -->
-                    <line x1="80" y1="300" x2="550" y2="300" stroke="black" stroke-width="2"/>
-                    <line x1="80" y1="50" x2="80" y2="300" stroke="black" stroke-width="2"/>
+                <h4>Hemoglobina por Estado Nutricional</h4>
+                <p>Este gráfico de caixa (boxplot ) compara os níveis de hemoglobina entre crianças com baixo peso e peso normal.</p>
+                <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="600" height="400" fill="#ffffff" rx="8"/>
+                    <line x1="80" y1="300" x2="550" y2="300" stroke="#e8eef5" stroke-width="2"/>
+                    <line x1="80" y1="50" x2="80" y2="300" stroke="#e8eef5" stroke-width="2"/>
                     
-                    <!-- Caixa Peso Normal -->
-                    <rect x="150" y="140" width="80" height="110" fill="#e8d5f2" stroke="black" stroke-width="2"/>
-                    <line x1="150" y1="175" x2="230" y2="175" stroke="black" stroke-width="2"/>
-                    <line x1="190" y1="90" x2="190" y2="140" stroke="black" stroke-width="1"/>
-                    <line x1="190" y1="250" x2="190" y2="290" stroke="black" stroke-width="1"/>
-                    <line x1="170" y1="90" x2="210" y2="90" stroke="black" stroke-width="1"/>
-                    <line x1="170" y1="290" x2="210" y2="290" stroke="black" stroke-width="1"/>
+                    <rect x="150" y="140" width="80" height="110" fill="#4a90e2" opacity="0.7" stroke="#4a90e2" stroke-width="2" rx="4"/>
+                    <line x1="150" y1="175" x2="230" y2="175" stroke="#ffffff" stroke-width="2"/>
+                    <line x1="190" y1="90" x2="190" y2="140" stroke="#4a90e2" stroke-width="2"/>
+                    <line x1="190" y1="250" x2="190" y2="290" stroke="#4a90e2" stroke-width="2"/>
+                    <line x1="170" y1="90" x2="210" y2="90" stroke="#4a90e2" stroke-width="2"/>
+                    <line x1="170" y1="290" x2="210" y2="290" stroke="#4a90e2" stroke-width="2"/>
                     
-                    <!-- Caixa Baixo Peso -->
-                    <rect x="350" y="150" width="80" height="100" fill="#f0e8f8" stroke="black" stroke-width="2"/>
-                    <line x1="350" y1="185" x2="430" y2="185" stroke="black" stroke-width="2"/>
-                    <line x1="390" y1="100" x2="390" y2="150" stroke="black" stroke-width="1"/>
-                    <line x1="390" y1="250" x2="390" y2="280" stroke="black" stroke-width="1"/>
-                    <line x1="370" y1="100" x2="410" y2="100" stroke="black" stroke-width="1"/>
-                    <line x1="370" y1="280" x2="410" y2="280" stroke="black" stroke-width="1"/>
+                    <rect x="350" y="150" width="80" height="100" fill="#7cb342" opacity="0.7" stroke="#7cb342" stroke-width="2" rx="4"/>
+                    <line x1="350" y1="185" x2="430" y2="185" stroke="#ffffff" stroke-width="2"/>
+                    <line x1="390" y1="100" x2="390" y2="150" stroke="#7cb342" stroke-width="2"/>
+                    <line x1="390" y1="250" x2="390" y2="280" stroke="#7cb342" stroke-width="2"/>
+                    <line x1="370" y1="100" x2="410" y2="100" stroke="#7cb342" stroke-width="2"/>
+                    <line x1="370" y1="280" x2="410" y2="280" stroke="#7cb342" stroke-width="2"/>
                     
-                    <!-- Rótulos -->
-                    <text x="190" y="330" text-anchor="middle" font-size="14">Peso Normal</text>
-                    <text x="390" y="330" text-anchor="middle" font-size="14">Baixo Peso</text>
-                    <text x="50" y="175" text-anchor="middle" font-size="12">Hemoglobina</text>
+                    <text x="190" y="330" text-anchor="middle" font-size="14" fill="#2c3e50" font-weight="500">Peso Normal</text>
+                    <text x="390" y="330" text-anchor="middle" font-size="14" fill="#2c3e50" font-weight="500">Baixo Peso</text>
                 </svg>
             </div>
         </section>
 
-        <!-- Seção de Conclusões -->
+        <!-- SEÇÃO: CONCLUSÕES -->
         <section id="conclusoes">
             <h2>Conclusões</h2>
 
@@ -592,7 +780,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 - Trabalho Final | Métodos Quantitativos de Investigação em Saúde | UFRJ</p>
+        <p>© 2025 - Trabalho Final | Métodos Quantitativos de Investigação em Saúde | UFRJ</p>
         <p>Universidade Federal do Rio de Janeiro - Instituto de Nutrição Josué de Castro</p>
     </footer>
 </body>
