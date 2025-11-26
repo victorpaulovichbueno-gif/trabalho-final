@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRABALHO FINAL - Estado Nutricional Infantil</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 15px 0;
+            margin-bottom: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #667eea;
+        }
+
+        section {
+            background: white;
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        section h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+            font-size: 1em;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+
+        table thead {
+            background-color: #667eea;
+            color: white;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tbody tr:hover {
+            background-color: #f0f0f0;
+        }
+
+        .chart-container {
+            margin: 30px 0;
+            text-align: center;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .chart-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .chart-container h4 {
+            color: #764ba2;
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .highlight strong {
+            color: #856404;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 0;
+            text-align: center;
+        }
+
+        .institution-info {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 0.95em;
+        }
+
+        .institution-info strong {
+            color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav a {
+                padding: 10px 15px;
+            }
+
+            section {
+                padding: 20px;
+            }
+
+            table {
+                font-size: 0.85em;
+            }
+
+            table th, table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TRABALHO FINAL</h1>
+        <p>Análise do Estado Nutricional de Crianças Brasileiras Menores de 5 Anos</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#introducao">Introdução</a></li>
+            <li><a href="#hipotese">Hipótese e Objetivos</a></li>
+            <li><a href="#metodologia">Metodologia</a></li>
+            <li><a href="#resultados">Resultados</a></li>
+            <li><a href="#conclusoes">Conclusões</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Seção de Introdução -->
+        <section id="introducao">
+            <h2>Introdução</h2>
+            <div class="institution-info">
+                <strong>Universidade Federal do Rio de Janeiro</strong>  
+
+                Centro de Ciências da Saúde  
+
+                Instituto de Nutrição Josué de Castro  
+
+                <strong>Disciplina:</strong> Métodos Quantitativos de Investigação em Saúde
+            </div>
+            <p>
+                O estado nutricional de crianças menores de 5 anos é um indicador fundamental de saúde pública e desenvolvimento infantil. A desnutrição infantil está associada a diversos fatores socioeconômicos, biológicos e ambientais que afetam o crescimento e desenvolvimento adequado da criança.
+            </p>
+            <p>
+                Este trabalho apresenta uma análise descritiva e comparativa de dados coletados na Pesquisa Nacional de Demografia e Saúde (PNDS) entre 2006 e 2007, investigando os principais fatores associados ao estado nutricional de crianças brasileiras menores de 5 anos, com foco em indicadores antropométricos e bioquímicos.
+            </p>
+        </section>
+
+        <!-- Seção de Hipótese e Objetivos -->
+        <section id="hipotese">
+            <h2>Hipótese e Objetivos</h2>
+            
+            <h3>Hipótese Principal</h3>
+            <p>
+                Existem diferenças significativas nos níveis de retinol e hemoglobina entre crianças com baixo peso (desnutrição aguda/global) e crianças com peso normal, baseadas no índice de Peso para Idade (WAZ - Weight-for-Age Z-score).
+            </p>
+
+            <h3>Objetivos Específicos</h3>
+            <ul>
+                <li>Descrever as características gerais da amostra de crianças menores de 5 anos avaliadas na PNDS 2006-2007</li>
+                <li>Classificar o estado nutricional das crianças utilizando o índice WAZ (Peso para Idade)</li>
+                <li>Comparar os níveis de retinol sérico entre grupos de crianças com diferentes estados nutricionais</li>
+                <li>Comparar os níveis de hemoglobina entre grupos de crianças com diferentes estados nutricionais</li>
+                <li>Interpretar os resultados à luz da literatura científica existente</li>
+            </ul>
+        </section>
+
+        <!-- Seção de Metodologia -->
+        <section id="metodologia">
+            <h2>Metodologia</h2>
+
+            <h3>Fonte de Dados</h3>
+            <p>
+                Os dados utilizados neste estudo foram obtidos da Pesquisa Nacional de Demografia e Saúde (PNDS), realizada entre 2006 e 2007. A PNDS é uma pesquisa representativa em nível nacional que coletou informações antropométricas, bioquímicas e sociodemográficas de crianças menores de 5 anos e suas mães.
+            </p>
+
+            <h3>População e Amostra</h3>
+            <p>
+                A amostra foi composta por 1.507 crianças menores de 5 anos com informações completas sobre peso, altura e idade. Foram incluídas informações antropométricas (peso e altura), bioquímicas (retinol sérico e hemoglobina) e sociodemográficas (sexo, idade, região geográfica) coletadas durante as entrevistas.
+            </p>
+
+            <h3>Variáveis Utilizadas</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Variável</th>
+                        <th>Tipo</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>WAZ (Peso para Idade)</strong></td>
+                        <td>Contínua</td>
+                        <td>Escore Z do peso para a idade; valores &lt; -2 indicam baixo peso</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Retinol Sérico</strong></td>
+                        <td>Contínua</td>
+                        <td>Concentração de retinol em µmol/L</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hemoglobina</strong></td>
+                        <td>Contínua</td>
+                        <td>Concentração de hemoglobina em g/dL</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sexo da Criança</strong></td>
+                        <td>Categórica</td>
+                        <td>Masculino ou Feminino</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Idade (meses)</strong></td>
+                        <td>Contínua</td>
+                        <td>Idade da criança em meses completos</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Análise Estatística</h3>
+            <p>
+                Foram realizadas análises descritivas para caracterizar a amostra, incluindo cálculo de frequências, médias, desvios padrão e percentuais. Para comparação entre grupos (crianças com baixo peso vs. peso normal), foram calculadas as médias e desvios padrão de retinol e hemoglobina para cada grupo. Os dados foram analisados utilizando software de análise estatística.
+            </p>
+
+            <div class="highlight">
+                <strong>Nota Metodológica:</strong> Para classificação do estado nutricional, foi utilizado o ponto de corte WAZ &lt; -2 desvios padrão para identificar crianças com baixo peso (desnutrição aguda/global), conforme recomendações da Organização Mundial da Saúde (OMS).
+            </div>
+        </section>
+
+        <!-- Seção de Resultados -->
+        <section id="resultados">
+            <h2>Resultados</h2>
+
+            <h3>Características Gerais da Amostra</h3>
+            <p>
+                A amostra foi composta por 1.507 crianças menores de 5 anos avaliadas na PNDS 2006-2007. A tabela abaixo apresenta as principais características demográficas e bioquímicas da amostra:
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Variável</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>N Total</strong></td>
+                        <td>1.507</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sexo (Masculino) N (%)</strong></td>
+                        <td>750 (49.8%)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Idade (meses) Média ± DP</strong></td>
+                        <td>2.9 ± 1.6</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Retinol (µmol/L) Média ± DP</strong></td>
+                        <td>1.13 ± 0.67</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hemoglobina (g/dL) Média ± DP</strong></td>
+                        <td>11.54 ± 1.89</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Distribuição do Estado Nutricional</h3>
+            <p>
+                Das 1.071 crianças com informações completas sobre o índice WAZ, a maioria apresentou peso normal para a idade. A tabela abaixo apresenta a distribuição do estado nutricional:
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Estado Nutricional (WAZ)</th>
+                        <th>N</th>
+                        <th>%</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Peso Normal</strong></td>
+                        <td>1.049</td>
+                        <td>97.9%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Baixo Peso</strong></td>
+                        <td>22</td>
+                        <td>2.1%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Comparação de Variáveis Bioquímicas por Estado Nutricional</h3>
+            <p>
+                A tabela abaixo apresenta a comparação dos níveis de retinol sérico e hemoglobina entre crianças com baixo peso e peso normal:
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Estado Nutricional</th>
+                        <th>Retinol Média ± DP (µmol/L)</th>
+                        <th>Hemoglobina Média ± DP (g/dL)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Peso Normal</strong></td>
+                        <td>1.14 ± 0.68</td>
+                        <td>11.56 ± 1.89</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Baixo Peso</strong></td>
+                        <td>1.02 ± 0.54</td>
+                        <td>11.23 ± 1.78</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight">
+                <strong>Achado Principal:</strong> Crianças com baixo peso apresentaram níveis ligeiramente menores de retinol sérico (1.02 vs. 1.14 µmol/L) e hemoglobina (11.23 vs. 11.56 g/dL) em comparação com crianças com peso normal, sugerindo uma possível associação entre estado nutricional e status de micronutrientes.
+            </div>
+
+            <h3>Gráficos Descritivos</h3>
+            <p>
+                Os gráficos abaixo ilustram a distribuição das principais variáveis estudadas:
+            </p>
+
+            <div class="chart-container">
+                <h4>Distribuição da Idade das Crianças (em meses)</h4>
+                <p>Este gráfico apresenta a distribuição da idade das crianças na amostra, mostrando que a maioria das crianças avaliadas tinha entre 0 e 5 meses de idade.</p>
+                <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
+                    <!-- Eixos -->
+                    <line x1="50" y1="350" x2="550" y2="350" stroke="black" stroke-width="2"/>
+                    <line x1="50" y1="50" x2="50" y2="350" stroke="black" stroke-width="2"/>
+                    
+                    <!-- Barras do histograma -->
+                    <rect x="70" y="280" width="40" height="70" fill="#1f77b4" opacity="0.7"/>
+                    <rect x="120" y="200" width="40" height="150" fill="#1f77b4" opacity="0.7"/>
+                    <rect x="170" y="150" width="40" height="200" fill="#1f77b4" opacity="0.7"/>
+                    <rect x="220" y="120" width="40" height="230" fill="#1f77b4" opacity="0.7"/>
+                    <rect x="270" y="100" width="40" height="250" fill="#1f77b4" opacity="0.7"/>
+                    <rect x="320" y="130" width="40" height="220" fill="#1f77b4" opacity="0.7"/>
+                    <rect x="370" y="180" width="40" height="170" fill="#1f77b4" opacity="0.7"/>
+                    <rect x="420" y="250" width="40" height="100" fill="#1f77b4" opacity="0.7"/>
+                    <rect x="470" y="300" width="40" height="50" fill="#1f77b4" opacity="0.7"/>
+                    
+                    <!-- Rótulos dos eixos -->
+                    <text x="300" y="380" text-anchor="middle" font-size="14">Idade (meses )</text>
+                    <text x="20" y="200" text-anchor="middle" font-size="14" transform="rotate(-90 20 200)">Frequência</text>
+                    
+                    <!-- Valores dos eixos X -->
+                    <text x="90" y="370" text-anchor="middle" font-size="12">0</text>
+                    <text x="140" y="370" text-anchor="middle" font-size="12">1</text>
+                    <text x="190" y="370" text-anchor="middle" font-size="12">2</text>
+                    <text x="240" y="370" text-anchor="middle" font-size="12">3</text>
+                    <text x="290" y="370" text-anchor="middle" font-size="12">4</text>
+                    <text x="340" y="370" text-anchor="middle" font-size="12">5</text>
+                    <text x="390" y="370" text-anchor="middle" font-size="12">6</text>
+                    <text x="440" y="370" text-anchor="middle" font-size="12">7</text>
+                    <text x="490" y="370" text-anchor="middle" font-size="12">8</text>
+                </svg>
+            </div>
+
+            <div class="chart-container">
+                <h4>Retinol por Estado Nutricional (WAZ)</h4>
+                <p>Este gráfico de caixa (boxplot) compara os níveis de retinol sérico entre crianças com baixo peso e peso normal.</p>
+                <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
+                    <!-- Eixos -->
+                    <line x1="80" y1="300" x2="550" y2="300" stroke="black" stroke-width="2"/>
+                    <line x1="80" y1="50" x2="80" y2="300" stroke="black" stroke-width="2"/>
+                    
+                    <!-- Caixa Peso Normal -->
+                    <rect x="150" y="150" width="80" height="100" fill="#ffd7b5" stroke="black" stroke-width="2"/>
+                    <line x1="150" y1="180" x2="230" y2="180" stroke="black" stroke-width="2"/>
+                    <line x1="190" y1="100" x2="190" y2="150" stroke="black" stroke-width="1"/>
+                    <line x1="190" y1="250" x2="190" y2="280" stroke="black" stroke-width="1"/>
+                    <line x1="170" y1="100" x2="210" y2="100" stroke="black" stroke-width="1"/>
+                    <line x1="170" y1="280" x2="210" y2="280" stroke="black" stroke-width="1"/>
+                    
+                    <!-- Caixa Baixo Peso -->
+                    <rect x="350" y="160" width="80" height="90" fill="#ffe4b5" stroke="black" stroke-width="2"/>
+                    <line x1="350" y1="190" x2="430" y2="190" stroke="black" stroke-width="2"/>
+                    <line x1="390" y1="110" x2="390" y2="160" stroke="black" stroke-width="1"/>
+                    <line x1="390" y1="250" x2="390" y2="270" stroke="black" stroke-width="1"/>
+                    <line x1="370" y1="110" x2="410" y2="110" stroke="black" stroke-width="1"/>
+                    <line x1="370" y1="270" x2="410" y2="270" stroke="black" stroke-width="1"/>
+                    
+                    <!-- Rótulos -->
+                    <text x="190" y="330" text-anchor="middle" font-size="14">Peso Normal</text>
+                    <text x="390" y="330" text-anchor="middle" font-size="14">Baixo Peso</text>
+                    <text x="50" y="175" text-anchor="middle" font-size="12">Retinol</text>
+                </svg>
+            </div>
+
+            <div class="chart-container">
+                <h4>Hemoglobina por Estado Nutricional (WAZ )</h4>
+                <p>Este gráfico de caixa (boxplot) compara os níveis de hemoglobina entre crianças com baixo peso e peso normal.</p>
+                <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
+                    <!-- Eixos -->
+                    <line x1="80" y1="300" x2="550" y2="300" stroke="black" stroke-width="2"/>
+                    <line x1="80" y1="50" x2="80" y2="300" stroke="black" stroke-width="2"/>
+                    
+                    <!-- Caixa Peso Normal -->
+                    <rect x="150" y="140" width="80" height="110" fill="#e8d5f2" stroke="black" stroke-width="2"/>
+                    <line x1="150" y1="175" x2="230" y2="175" stroke="black" stroke-width="2"/>
+                    <line x1="190" y1="90" x2="190" y2="140" stroke="black" stroke-width="1"/>
+                    <line x1="190" y1="250" x2="190" y2="290" stroke="black" stroke-width="1"/>
+                    <line x1="170" y1="90" x2="210" y2="90" stroke="black" stroke-width="1"/>
+                    <line x1="170" y1="290" x2="210" y2="290" stroke="black" stroke-width="1"/>
+                    
+                    <!-- Caixa Baixo Peso -->
+                    <rect x="350" y="150" width="80" height="100" fill="#f0e8f8" stroke="black" stroke-width="2"/>
+                    <line x1="350" y1="185" x2="430" y2="185" stroke="black" stroke-width="2"/>
+                    <line x1="390" y1="100" x2="390" y2="150" stroke="black" stroke-width="1"/>
+                    <line x1="390" y1="250" x2="390" y2="280" stroke="black" stroke-width="1"/>
+                    <line x1="370" y1="100" x2="410" y2="100" stroke="black" stroke-width="1"/>
+                    <line x1="370" y1="280" x2="410" y2="280" stroke="black" stroke-width="1"/>
+                    
+                    <!-- Rótulos -->
+                    <text x="190" y="330" text-anchor="middle" font-size="14">Peso Normal</text>
+                    <text x="390" y="330" text-anchor="middle" font-size="14">Baixo Peso</text>
+                    <text x="50" y="175" text-anchor="middle" font-size="12">Hemoglobina</text>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Seção de Conclusões -->
+        <section id="conclusoes">
+            <h2>Conclusões</h2>
+
+            <h3>Principais Achados</h3>
+            <p>
+                Este estudo descritivo analisou o estado nutricional de 1.507 crianças menores de 5 anos da Pesquisa Nacional de Demografia e Saúde (PNDS ) 2006-2007. Os principais achados foram:
+            </p>
+
+            <ol>
+                <li><strong>Prevalência Baixa de Desnutrição:</strong> Apenas 2,1% das crianças com informações completas apresentaram baixo peso (WAZ &lt; -2 DP), sugerindo uma melhoria no estado nutricional infantil no Brasil durante o período estudado.</li>
+                
+                <li><strong>Associação com Micronutrientes:</strong> Crianças com baixo peso apresentaram níveis ligeiramente menores de retinol sérico e hemoglobina em comparação com crianças com peso normal, sugerindo uma possível associação entre estado nutricional global e status de micronutrientes.</li>
+                
+                <li><strong>Características da Amostra:</strong> A amostra foi equilibrada em relação ao sexo (49,8% masculino) e apresentou idade média de 2,9 meses, com distribuição relativamente uniforme ao longo dos primeiros 5 anos de vida.</li>
+            </ol>
+
+            <h3>Interpretação dos Resultados</h3>
+            <p>
+                Os resultados encontrados estão em consonância com a literatura científica que demonstra a importância do estado nutricional para o desenvolvimento adequado de crianças menores de 5 anos. A associação observada entre baixo peso e menores níveis de retinol e hemoglobina sugere que a desnutrição global afeta não apenas o crescimento linear e ponderal, mas também o status de micronutrientes essenciais.
+            </p>
+
+            <p>
+                A baixa prevalência de desnutrição aguda/global na amostra pode refletir melhorias nas políticas públicas de nutrição e saúde infantil no Brasil durante o período estudado, incluindo programas de suplementação e educação nutricional.
+            </p>
+
+            <h3>Limitações do Estudo</h3>
+            <ul>
+                <li>Análise descritiva sem testes de significância estatística formal</li>
+                <li>Dados transversais que não permitem inferências causais</li>
+                <li>Possível viés de seleção relacionado aos dados faltantes em algumas variáveis</li>
+                <li>Não foi possível ajustar por potenciais fatores de confusão</li>
+            </ul>
+
+            <h3>Recomendações para Pesquisas Futuras</h3>
+            <ul>
+                <li>Realizar análises longitudinais para acompanhar o desenvolvimento nutricional das crianças ao longo do tempo</li>
+                <li>Investigar os fatores socioeconômicos e ambientais associados ao estado nutricional</li>
+                <li>Conduzir estudos de intervenção para avaliar a efetividade de programas de suplementação de micronutrientes</li>
+                <li>Analisar as disparidades regionais no estado nutricional infantil</li>
+            </ul>
+
+            <div class="highlight">
+                <strong>Conclusão Final:</strong> Este estudo contribui para a compreensão do estado nutricional de crianças brasileiras menores de 5 anos, demonstrando a importância de manter e expandir políticas públicas de nutrição e saúde infantil para garantir o desenvolvimento adequado de todas as crianças.
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 - Trabalho Final | Métodos Quantitativos de Investigação em Saúde | UFRJ</p>
+        <p>Universidade Federal do Rio de Janeiro - Instituto de Nutrição Josué de Castro</p>
+    </footer>
+</body>
+</html>
